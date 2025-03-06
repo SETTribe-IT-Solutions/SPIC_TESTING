@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document with Sidebar</title>
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <style>
+        /* Base styles for the toggle button (always applied) */
+        #sidebarToggle {
+            position: fixed;
+            top: 8px;
+            z-index: 1000;
+            background-color: transparent;
+            border-color: white;
+            color: black;
+            padding: 5px 10px;
+            transition: left 0.3s ease; /* Smooth transition */
+            cursor: pointer; /* Improve UX */
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            width: 250px;
+            transition: width 0.3s ease;
+        }
+
+        .sidebar.minimized {
+            width: 70px;
+        }
+
+        .sidebar .nav .nav-item .nav-link i.menu-arrow {
+            display: inline-block;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin-left: auto;
+            margin-right: 0.2rem;
+            color: #ffffff;
+            font-weight: normal;
+        }
+
+        .sidebar .menu-title {
+            display: inline-block;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar.minimized .menu-title {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .sidebar .menu-icon {
+            margin-right: 10px;
+        }
+
+        .sidebar.minimized .menu-icon {
+            margin-right: 0;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            #sidebarToggle {
+                left: 10px; /* Initial position */
+            }
+
+            #sidebarToggle.minimized {
+                left: 80px;  /* Minimized position */
+            }
+
+            .sidebar {
+                width: 500px;
+                left: -500px;
+                position: fixed;
+                top: 0;
+                height: 100%;
+                overflow-y: auto;
+                background-color: #223e9c;
+                transition: left 0.3s ease;
+                z-index: 1001;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .sidebar.minimized .menu-title {
+                display: block;
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 769px) {
+            #sidebarToggle {
+                left: 260px; /* Initial Desktop Position */
+            }
+
+            #sidebarToggle.minimized {
+                left: 80px; /* Minimized Desktop Position */
+            }
+
+
+            .sidebar.open { /* Ensure sidebar is always open on desktop */
+                left: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Toggle Button -->
+    <button id="sidebarToggle" class="btn btn-outline">
+        <i class="mdi mdi-menu" style="color: white;"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="../pages/dashboard.php">
+                    <i class="mdi mdi-view-quilt menu-icon"></i>
+                    <span class="menu-title">Dashboard</span>
+                    <div class="badge badge-info badge-pill">2</div>
+                </a>
+            </li>
+            <li class="nav-item sidebar-category">
+                <p>Pages</p>
+                <span></span>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="../pages/datafilling.php">
+                    <i class="mdi mdi-account-card-details menu-icon"></i>
+                    <span class="menu-title">Data Filling</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="../pages/appointment_booking.php">
+                    <i class="mdi mdi-calendar-check menu-icon"></i>
+                    <span class="menu-title">Appointment Booking</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../pages/createQuotation.php">
+                    <i class="mdi mdi-file-document menu-icon"></i>
+                    <span class="menu-title">Quotation Preparation</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../pages/carDetails.php">
+                    <i class="mdi mdi-comment-account menu-icon"></i>
+                    <span class="menu-title">Details of Car and Owner</span>
+                </a>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="../pages/serviceBooking.php">
+                    <i class="mdi mdi-wrench menu-icon"></i>
+                    <span class="menu-title">Service Booking</span>
+                </a>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="../pages/quotationTable.php">
+                    <i class="mdi mdi-cash-multiple menu-icon"></i>
+                    <span class="menu-title">Quotation</span>
+                </a>
+            </li> -->
+
+            <li class="nav-item">
+                <a class="nav-link" href="../pages/addCars.php">
+                    <i class=" mdi mdi-taxi menu-icon"></i>
+                    <span class="menu-title">Add Cars </span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="../pages/master_yash.php">
+                    <i class=" mdi mdi-content-paste menu-icon"></i>
+                    <span class="menu-title">Add Service </span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="../pages/master_varad.php">
+                    <i class="mdi mdi-account-multiple-outline menu-icon"></i>
+                    <span class="menu-title">Add Worker </span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="../pages/logout.php">
+                    <i class="mdi mdi-logout menu-icon"></i>
+                    <span class="menu-title">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Base Scripts -->
+    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Ensure this script is included for Bootstrap collapse to work -->
+
+    <!-- Custom JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('sidebar');
+
+
+            /* New code for the toggle button */
+            const setInitialSidebarState = () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('minimized');
+                } else {
+                    sidebar.classList.add('minimized');
+                }
+            };
+
+            const toggleSidebar = () => {
+                sidebar.classList.toggle('minimized');
+                sidebarToggle.classList.toggle('minimized'); // toggle the class in toggle button
+            };
+
+            setInitialSidebarState(); // Initialize state based on screen size
+
+
+            sidebarToggle.addEventListener('click', toggleSidebar);
+              /* End of new toggle button code*/
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            // Close sidebar when a link is clicked (for mobile view)
+            navLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    console.log(window.innerWidth);
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('open');
+                    }
+                });
+            });
+
+            sidebarToggle.addEventListener('click', function () {
+                sidebar.classList.toggle('open');
+
+                if (window.innerWidth <= 768) { //If on mobile device,
+                    if (sidebar.classList.contains('open')) {
+                        sidebarToggle.style.left = "500px";
+                    } else {
+                        sidebarToggle.style.left = "10px";
+                    }
+
+                }
+
+            });
+        });
+    </script>
+</body>
+
+</html>
